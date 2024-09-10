@@ -20,5 +20,5 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh ubuntu@seu-ip-publico-ec2 "cd /var/www/minha-api-ec2 && git pull && composer install"
+          ssh ubuntu@ip-172-31-6-217 "cd /var/www/minha-api-ec2 && git pull && composer install"
 
