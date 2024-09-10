@@ -13,9 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create .ssh directory
+        run: mkdir -p ~/.ssh
+
       - name: Add EC2 host to known_hosts
-        run: |
-          ssh-keyscan -H 3.12.148.12 >> ~/.ssh/known_hosts
+        run: ssh-keyscan -H 3.12.148.12 >> ~/.ssh/known_hosts
 
       - name: Create PEM file
         run: echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/your-key.pem
@@ -25,5 +27,3 @@ jobs:
 
       - name: Deploy to EC2 via SSH
         run: ssh -i /tmp/your-key.pem ubuntu@3.12.148.12 'cd /var/www/minha-api-ec2 && git pull && composer install'
-
-
